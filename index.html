@@ -1053,11 +1053,19 @@
         // Add navigation menu interactivity
         document.querySelectorAll('.nav-links a, .auth-buttons a').forEach(link => {
             link.addEventListener('click', function(e) {
-                if (!this.getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    const linkText = this.textContent;
-                    alert(`Navigating to: "${linkText}"\n\nThis would normally redirect to the ${linkText.toLowerCase()} page.`);
+               const linkText = this.textContent;
+               const href = this.getAttribute('href');
+
+                // Handle Sign In button specifically
+                 if (linkText === 'Sign In') {
+                     window.location.href = 'signin.html';
+                     return;
                 }
+                 // Handle other navigation
+                 if (!href.startsWith('#')) {
+                    e.preventDefault();
+                    alert(`Navigating to: "${linkText}"\n\nThis would normally redirect to the ${linkText.toLowerCase()} page.`);
+                 }
             });
         });
 
